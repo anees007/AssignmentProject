@@ -26,4 +26,8 @@ export default {
   secretAccessKey: env.SECRET_ACCESS_KEY!,
   region: env.REGION!,
   bucket: env.BUCKET!,
+  userEmail: env.userEmail!,
+  password: env.password!,
+  companyEmail : env.companyEmail!,
+  Server : 'Gmail'!
 } as const;

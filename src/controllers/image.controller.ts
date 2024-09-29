@@ -1,8 +1,10 @@
+import nodemailer from 'nodemailer';
 import { Request, Response } from 'express';
 import { Image } from '../models/Image'; // Sequelize Image model
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { s3Client } from "@src/configs/aws";
 import EnvVars from "@src/constants/EnvVars";
+
 
 // Add new image
 
@@ -12,6 +14,10 @@ export const uploadImageS3 = async (req: Request, res: Response) => {
       if (!req.file) {
         return res.status(400).json({ message: "No file uploaded" });
       }
+      const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ message: 'User email is required' });
+    }
       const file = req.file as Express.Multer.File;
       console.log(file.buffer);
       const key = `images/${file.originalname}`;
@@ -28,9 +34,28 @@ export const uploadImageS3 = async (req: Request, res: Response) => {
       const newImage = await Image.create({
         url: fileUrl
       });
-      // file url will be store in the BD
+      const transporter = nodemailer.createTransport({
+        host: EnvVars.Server, 
+        port: 587,
+        secure: false, 
+        auth: {
+          user: EnvVars.userEmail,
+          pass: EnvVars.password,
+        },
+      });
+  
+      const mailOptions = {
+        from: EnvVars.companyEmail,
+        to: email,
+        subject: 'New Image Processed',
+        text: `A new image has been processed and is available here: ${fileUrl}`,
+      };
+  
+      // Send email to the user
+      await transporter.sendMail(mailOptions);
+  
       return res.status(200).json({
-        message: "File uploaded!",
+        message: 'File uploaded and user notified!',
       });
     } catch (error) {
       const message = error.message || "Failed to upload file";
