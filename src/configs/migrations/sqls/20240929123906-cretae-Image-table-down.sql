@@ -1,2 +1,2 @@
 /* Replace with your SQL commands */
-drop table image;
+drop table Image

@@ -25,6 +25,9 @@ export const uploadImageS3 = async (req: Request, res: Response) => {
   
       const fileUrl = `https://${EnvVars.bucket}.s3.${EnvVars.region}.amazonaws.com/${key}`;
   
+      const newImage = await Image.create({
+        url: fileUrl
+      });
       // file url will be store in the BD
       return res.status(200).json({
         message: "File uploaded!",
@@ -39,8 +42,7 @@ export const uploadImageS3 = async (req: Request, res: Response) => {
 // Add comments to existing image
 export const addComment = async (req: Request, res: Response) => {
     try {
-        const { imageId } = req.params;
-        const { comment } = req.body;
+        const { comment,imageId } = req.body;
 
         const image = await Image.findByPk(imageId);
 

@@ -1,9 +1,8 @@
 /* Replace with your SQL commands */
-CREATE TABLE imagesMetaData (
+CREATE TABLE Image (
     id SERIAL PRIMARY KEY,
     url VARCHAR(255),
-    comment TEXT,
+    comment VARCHAR(255) DEFAULT NULL,
     createdAt TIMESTAMP DEFAULT NOW(),
     updatedAt TIMESTAMP DEFAULT NOW()
 );
-

@@ -5,6 +5,6 @@ import { validate, ValidationType } from "@src/middlewares/validator";
 const router = Router();
 
 router.post("/upload-image", upload, uploadImageS3);
-router.post('/:imageId/comments',addComment);  // For adding comments
+router.post('/addCommentById',addComment);  // For adding comments
 
 export default router;
