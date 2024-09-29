@@ -1,45 +1,38 @@
 
 
-## Available Scripts
+create the .env file and
+//Database
+DATABASE=DBName
+DB_HOST=host
+DB_PORT=port
+DB_USERNAME=username
+DB_PASSWORD=password
 
-### `npm run dev`
+//Server
+PORT=3001
+SECRETKEY=hellosecret 
 
-Run the server in development mode.
+s3 credentials
+ACCESS_KEY_ID = ACCESS_KEY_ID
+SECRET_ACCESS_KEY=SECRET_ACCESS_KEY
+REGION= REGION
+BUCKET= BUCKET
 
-### `npm test`
+step 2 is
+install the packges
+# npm i 
 
-Run all unit-tests with hot-reloading.
+step 2 is
+create the migration by this command
+# db-migrate up
+ step 4 is 
 
-### `npm test -- --testFile="name of test file" (i.e. --testFile=Users).`
-
-Run a single unit-test.
-
-### `npm run test:no-reloading`
-
-Run all unit-tests without hot-reloading.
-
-### `npm run lint`
-
-Check for linting errors.
-
-### `npm run build`
-
-Build the project for production.
-
-### `npm start`
-
-Run the production build (Must be built first).
-
-### `npm start -- --env="name of env file" (default is production).`
-
-Run production build with a different env file.
+ run the project by command
+# npm run dev
 
 
-## Additional Notes
+project is 
 
-- If `npm run dev` gives you issues with bcrypt on MacOS you may need to run: `npm rebuild bcrypt --build-from-source`. 
-
-```
 NodeTsSquelize
 ├─ .db-migraterc
 ├─ .eslintignore
